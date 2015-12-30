@@ -12,16 +12,20 @@ public class MainActivity extends Activity {
 
     public void showXY(View view){
         ImageView animated = (ImageView) view;
-        animated.setAlpha(0f);
-        animated.setRotationX(0l);
-        if (player == 1) {
-            animated.setImageResource(R.drawable.x);
-            player = 2;
-        } else {
-            animated.setImageResource(R.drawable.o);
-            player = 1;
+        int tag = Integer.parseInt(view.getTag().toString());
+        if(fields[tag] == 0) {
+            animated.setAlpha(0f);
+            animated.setRotationX(0l);
+            fields[tag] = player;
+            if (player == 1) {
+                animated.setImageResource(R.drawable.x);
+                player = 2;
+            } else {
+                animated.setImageResource(R.drawable.o);
+                player = 1;
+            }
+            animated.animate().alpha(1f).rotationXBy(360l).setDuration(700);
         }
-        animated.animate().alpha(1f).rotationXBy(360l).setDuration(700);
     }
 
     @Override
